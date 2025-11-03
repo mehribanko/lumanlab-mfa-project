@@ -2,17 +2,6 @@
 
 > 보호자, 파트너, 어드민이 공존하는 육아 플랫폼의 백엔드 인증 시스템
 
-## 목차
-
-1. [프로젝트 개요](#프로젝트-개요)
-2. [기술 스택](#기술-스택)
-3. [주요 기능](#주요-기능)
-4. [실행 방법](#실행-방법)
-5. [아키텍처](#아키텍처)
-6. [API 문서](#api-문서)
-7. [운영 고려사항](#운영-고려사항)
-
-
 ---
 
 ## 프로젝트 개요
@@ -517,24 +506,24 @@ DDL SQL 쿼리와 Flyway 마이그레이션 스크립트 작성에 AI를 활용�
 ### 4. Troubleshooting
 개발 중 발생한 여러 에러를 AI와 함께  해결했습니다.
 
-문제 1: JavaMailSender Bean 생성 실패
+#### 문제 1: JavaMailSender Bean 생성 실패
 
 AI 솔루션:
 gradleimplementation 'org.springframework.boot:spring-boot-starter-mail'
 
 
-문제 2: Swagger 접근 불가
+#### 문제 2: Swagger 접근 불가
 
 swagger 좀 더 예전 라이브러리 버전으로 바꾸고 문제 해결되었음
 
-문제 4: Google OAuth redirect_uri_mismatch
+#### 문제 4: Google OAuth redirect_uri_mismatch
 
 Error 400: redirect_uri_mismatch
 
 AI 솔루션: Google Console에 정확한 리다이렉트 URI 등록
 http://localhost:8080/login/oauth2/code/google
 
-문제 5: Flyway 마이그레이션 실패
+#### 5: Flyway 마이그레이션 실패
 
 AI 솔루션:
 - 마이그레이션 파일 순서 확인
