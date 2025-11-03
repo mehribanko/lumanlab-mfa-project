@@ -1,0 +1,18 @@
+package com.lumonlab.childcaremfa.feat.auth.dto;
+
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RefreshTokenReq {
+
+    @NotBlank(message = "Refresh token 필수 입니다!")
+    private String refreshToken;
+}

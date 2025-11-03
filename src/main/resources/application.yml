@@ -1,0 +1,126 @@
+spring:
+  application:
+    name: childcare-auth-service
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:childcare_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    validate-on-migrate: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      timeout: 60000
+      jedis:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${Client_ID}
+            client-secret: ${Client_PASSWORD}
+            scope:
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/login/oauth2/code/google"
+
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL}
+    password: ${APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+            connectiontimeout: 5000
+            timeout: 3000
+            writetimeout: 5000
+
+password-reset:
+  token-expiration: 3600000
+  base-url: http://localhost:3000
+
+jwt:
+  secret: ${JWT_KEY}
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+  issuer: lumanlab-childcare
+
+
+mfa:
+  issuer: LumanLab Childcare
+  digits: 6
+  period: 30
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# 로그
+logging:
+  level:
+    root: INFO
+    com.lumanlab: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# 서버
+server:
+  port: 8080
+  shutdown: graceful
+  error:
+    include-message: always
+    include-binding-errors: always
+  compression:
+    enabled: true
