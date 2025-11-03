@@ -198,7 +198,7 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-### DB 스키마
+## DB 스키마
 
 ```
 users (사용자 정보)
